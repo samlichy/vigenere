@@ -1,0 +1,48 @@
+#include <iostream>
+#include <stdio.h>
+#include <math.h>
+
+using namespace std;
+
+//Power function
+long long int power(int a, int b, int p);
+{
+        if (b == 1)
+        {
+                return a;
+        }
+        else
+        {
+                return pow(a,b) % p;
+        }
+}
+
+int main()
+{
+        long long int a, b, p, g, keyA, keyB, x, y;
+
+        cout << "Provide public key (prime number p): " << endl;
+        cin >> p;
+
+        cout << "Provide public key (primitive root g): " << endl;
+        cin >> g;
+
+        cout << "Provide Alice's private key: " << endl;
+        cin >> a;
+
+        x = power(g, a, p);
+
+        cout << "Provide Bob's private key: " << endl;
+        cin >> b;
+
+        y = power(g, b, p);
+
+        //Generating secret keys after A & B exchange each others generated key
+        keyA = power(y, a, p);
+        keyB = power(x, b ,p);
+
+        cout << "Secret key for Alice is: " << keyA;
+        cout << "Secret key for Bob is: " << keyB;
+
+        return 0;
+}
